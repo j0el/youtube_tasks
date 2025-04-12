@@ -1,9 +1,9 @@
 import yfinance as yf
 
-ticker = 'AAPL'
+ticker = "AAPL"
 
-stock_data=yf.Ticker(ticker)
+stock_data = yf.Ticker(ticker)
 
-earning_calendar=stock_data.calendar
+earning_calendar = stock_data.calendar
 
 print(earning_calendar)

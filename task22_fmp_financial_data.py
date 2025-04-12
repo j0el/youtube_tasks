@@ -32,22 +32,22 @@ def save_to_json(data, filename):
     print(f"Data saved to {filename}")
 
 
-#Main function
-if __name__=="__main__":
-    #Stock symbol to be declared for data
-    stock_symbol="AMZN"
+# Main function
+if __name__ == "__main__":
+    # Stock symbol to be declared for data
+    stock_symbol = "AMZN"
 
-    #Defining endpoints to get data for
-    endpoints=["profile", "ratios", "financials"]
+    # Defining endpoints to get data for
+    endpoints = ["profile", "ratios", "financials"]
 
-    #Create folders to save files to
-    output_dir="fmp_data"
+    # Create folders to save files to
+    output_dir = "fmp_data"
     os.makedirs(output_dir, exist_ok=True)
 
-    #Going over iteration for each of elements of endpoints list
+    # Going over iteration for each of elements of endpoints list
     for endpoint in endpoints:
         print(f"Fetching data for endpoint {endpoint}")
-        data=fetch_fmp_data(endpoint, stock_symbol)
+        data = fetch_fmp_data(endpoint, stock_symbol)
         if data:
-            filename=os.path.join(output_dir, f"{stock_symbol}_{endpoint}.json")
+            filename = os.path.join(output_dir, f"{stock_symbol}_{endpoint}.json")
             save_to_json(data, filename)

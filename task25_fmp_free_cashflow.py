@@ -23,7 +23,10 @@ else:
     if isinstance(income_data, list) and len(income_data) > 0:
         df_income = pd.DataFrame(income_data).iloc[::-1]
         df_income.set_index("date", inplace=True)
-        numeric_cols = df_income.select_dtypes(include='number').columns
-        st.dataframe(df_income.style.format({col: "{:,.0f}" for col in numeric_cols}), use_container_width=True)
+        numeric_cols = df_income.select_dtypes(include="number").columns
+        st.dataframe(
+            df_income.style.format({col: "{:,.0f}" for col in numeric_cols}),
+            use_container_width=True,
+        )
     else:
         st.warning("No income statement")

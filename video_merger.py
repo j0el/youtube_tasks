@@ -37,5 +37,5 @@ if __name__ == "__main__":
     merge_videos(
         video1_path="C:/Users/avet_/Videos/video1.mp4",
         video2_path="C:/Users/avet_/Videos/video2.mp4",
-        output_path="C:/Users/avet_/Videos/video.mp4"
+        output_path="C:/Users/avet_/Videos/video.mp4",
     )

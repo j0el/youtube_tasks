@@ -8,14 +8,17 @@ CRITERIA = {
     "Price/Book Ratio": {"max": 1.5, "description": "Potentially undervalued stock"},
     "Return on Equity (ROE)": {"min": 8, "description": "Efficient profitability"},
     "Return on Assets (ROA)": {"min": 6, "description": "Operational efficiency"},
-    "Interest Coverage Ratio": {"min": 5, "description": "Ability to cover debt interest"},
+    "Interest Coverage Ratio": {
+        "min": 5,
+        "description": "Ability to cover debt interest",
+    },
 }
 
 
 # get list of stocks
 def load_stock_symbols():
     try:
-        with open('stocks.txt', 'r') as file:
+        with open("stocks.txt", "r") as file:
             symbols = [line.strip() for line in file if line.strip()]
             return symbols
     except FileNotFoundError:
@@ -32,8 +35,16 @@ def fetch_fundamental_data(stock_symbol):
         "Debt/Equity Ratio": info.get("debtToEquity", "N/A"),
         "Current Ratio": info.get("currentRatio", "N/A"),
         "Price/Book Ratio": info.get("priceToBook", "N/A"),
-        "Return on Equity (ROE)": info.get("returnOnEquity", "N/A") * 100 if info.get("returnOnEquity") else "N/A",
-        "Return on Assets (ROA)": info.get("returnOnAssets", "N/A") * 100 if info.get("returnOnAssets") else "N/A",
+        "Return on Equity (ROE)": (
+            info.get("returnOnEquity", "N/A") * 100
+            if info.get("returnOnEquity")
+            else "N/A"
+        ),
+        "Return on Assets (ROA)": (
+            info.get("returnOnAssets", "N/A") * 100
+            if info.get("returnOnAssets")
+            else "N/A"
+        ),
         "Interest Coverage Ratio": calculate_interest_ratio(financials),
     }
     return metrics
@@ -42,8 +53,8 @@ def fetch_fundamental_data(stock_symbol):
 # create helper method for Interest coverage Ratio
 def calculate_interest_ratio(financials):
     try:
-        ebit = financials.loc['Operating Income'].iloc[0]
-        interest_expense = financials.loc['Interest Expense'].iloc[0]
+        ebit = financials.loc["Operating Income"].iloc[0]
+        interest_expense = financials.loc["Interest Expense"].iloc[0]
         return ebit / interest_expense
     except (KeyError, IndexError, ZeroDivisionError):
         return "N/A"
@@ -87,5 +98,5 @@ else:
                 label=f"{metric} ({description})",
                 value=value if value != "N/A" else "N/A",
                 delta=result,
-                delta_color="inverse" if result == "Fail" else "normal"
+                delta_color="inverse" if result == "Fail" else "normal",
             )

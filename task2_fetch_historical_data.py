@@ -1,9 +1,9 @@
 import yfinance as yf
 
-ticker = 'AAPL'
+ticker = "AAPL"
 
-stock_data=yf.Ticker(ticker)
+stock_data = yf.Ticker(ticker)
 
-historical_data=stock_data.history(period='1mo')
+historical_data = stock_data.history(period="1mo")
 
 print(historical_data)
