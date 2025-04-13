@@ -2,6 +2,8 @@ import pandas as pd
 import yfinance as yf
 import os
 
+
+
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 csv_file_path = os.path.join(base_dir, "sp500_stocks.csv")
 sp500_stocks = pd.read_csv(csv_file_path)
